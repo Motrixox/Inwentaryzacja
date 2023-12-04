@@ -1,0 +1,18 @@
+<input hidden type="text" ngModel="{{employeeId}}" name="employeeId" class="form-control" id="employeeId" required readonly>
+<label for="employee">Pracownik</label>
+<mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Wyszukaj..."
+      [(ngModel)]="searchControl"
+      (ngModelChange)="onChange($event)"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let result of searchResults" [value]="result.fullName">
+        {{ result.fullName }}
+      </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+  

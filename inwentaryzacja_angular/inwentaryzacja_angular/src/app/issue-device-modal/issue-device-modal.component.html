@@ -1,0 +1,49 @@
+<Button class="btn btn-primary" (click)="openModal()">Wydaj sprzęt</Button>
+
+<div class="modal fade" id="issueDeviceModal" tabindex="-1" role="dialog" aria-labelledby="issueDeviceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="issueDeviceModalLabel">Wydaj sprzęt</h5>
+                <button type="button" class="btn-close" (click)="onCloseModal()" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="deviceId">Numer seryjny urządzenia</label>
+                    <input type="text" ngModel="{{serialNumber}}" class="form-control readonly" readonly>
+                </div>
+                <form #addDeviceIssue="ngForm"
+                    (ngSubmit)="onAddDeviceIssue(addDeviceIssue)">
+                    <div class="form-group" hidden>
+                        <label for="deviceId">ID urządzenia</label>
+                        <input type="text" ngModel="{{deviceId}}" name="deviceId" class="form-control" id="deviceId" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label for="employeeId">ID Pracownika ()</label><br> -->
+                        <app-searchbar-suggestions (employeeIdChange)="setEmployeeId($event)"></app-searchbar-suggestions>
+                    </div>
+                    <div class="form-group">
+                        <label for="DateOfIssue">Data wydania</label>
+                        <input type="date" ngModel="{{now}}" name="DateOfIssue" class="form-control" id="DateOfIssue" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="place">Miejsce</label>
+                        <input type="text" ngModel="{{place}}" name="place" class="form-control" id="place">
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Uwagi</label>
+                        <input type="text" ngModel name="notes" class="form-control" id="notes">
+                    </div>
+                    <div>
+                        <input id="issueSubmitButton" type="submit" hidden>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onCloseModal()" data-dismiss="modal">Zamknij</button>
+                <button type="button" class="btn btn-primary" (click)="clickSubmit()">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>

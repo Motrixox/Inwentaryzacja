@@ -1,0 +1,50 @@
+<Button class="btn btn-primary" (click)="onOpenModal()">Dodaj urządzenie do bazy danych</Button>
+
+<div class="modal fade" id="addDeviceScannerModal" tabindex="-1" role="dialog" aria-labelledby="addDeviceScannerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="addDeviceScannerModalLabel">Dodaj urządzenie</h2>
+                <button type="button" class="btn-close" (click)="onCloseModal()" data-dismiss="modal" aria-label="Close">
+                    
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #addDeviceForm="ngForm"
+                      (ngSubmit)="onAddDevice(addDeviceForm)">
+                    <div class="form-group">
+                        <label for="deviceTypeId">Typ urządzenia</label>
+                        <select class="form-select" aria-label="Default select example" name="deviceTypeId" [(ngModel)]="addDeviceForm.value.deviceTypeId">
+                            <option value="" disabled selected>Wybierz</option>
+                            <option *ngFor="let deviceType of deviceTypes" [value]=deviceType.id>{{ deviceType.type }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Kod</label>
+                        <input type="text" ngModel="{{code}}" name="code" class="form-control readonly" id="code" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="serialNumber">Numer seryjny</label>
+                        <input type="text" ngModel name="serialNumber" class="form-control" id="serialNumber" placeholder="Numer seryjny" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="place">Miejsce</label>
+                        <input type="text" ngModel name="place" class="form-control" id="place" placeholder="Miejsce" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Opis</label>
+                        <input type="text" ngModel name="description" class="form-control" id="description" placeholder="Opis" required>
+                    </div>
+                    
+                    <div hidden>
+                        <input id="submitBtn" type = "submit" >
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onCloseModal()" data-dismiss="modal">Zamknij</button>
+                <button type="button" class="btn btn-primary" (click)="onSaveModal()">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<Button class="btn btn-primary" (click)="openModal()">Zwróć sprzęt</Button>
+
+<div class="modal fade" id="returnDeviceModal" tabindex="-1" role="dialog" aria-labelledby="returnDeviceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="returnDeviceModalLabel">Zwróć sprzęt</h5>
+                <button type="button" class="btn-close" (click)="onCloseModal()" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="deviceId">Numer seryjny urządzenia</label>
+                    <input type="text" ngModel="{{issuedDevice?.device?.serialNumber}}" class="form-control readonly" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="deviceId">Pracownik</label>
+                    <input type="text" ngModel="{{issuedDevice?.employee?.firstName}} {{issuedDevice?.employee?.lastName}}" class="form-control readonly" readonly>
+                </div>
+                <form #addDeviceReturn="ngForm"
+                    (ngSubmit)="onAddDeviceReturn(addDeviceReturn)">
+                    <div class="form-group" hidden>
+                        <input type="text" ngModel="{{issuedDevice?.id}}" name="id" class="form-control" id="id" required readonly>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="deviceId">ID pracownika</label>
+                        <input type="text" ngModel="{{issuedDevice?.employeeId}}" name="employeeId" class="form-control" id="employeeId" required readonly>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label for="deviceId">ID urządzenia</label>
+                        <input type="text" ngModel="{{issuedDevice?.deviceId}}" name="deviceId" class="form-control" id="deviceId" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="DateOfReturn">Data wydania</label>
+                        <input type="date" ngModel="{{DateOfIssueString}}" name="DateOfIssue" class="form-control readonly" id="DateOfIssue" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="DateOfReturn">Data zwrotu</label>
+                        <input type="date" ngModel="{{now}}" name="DateOfReturn" class="form-control" id="DateOfReturn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="place">Miejsce</label>
+                        <input type="text" ngModel="{{place}}" name="place" class="form-control" id="place">
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Uwagi</label>
+                        <input type="text" ngModel="{{issuedDevice?.notes}}" name="notes" class="form-control" id="notes">
+                    </div>
+                    <div>
+                        <input id="returnSubmitButton" type="submit" hidden>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onCloseModal()" data-dismiss="modal">Zamknij</button>
+                <button type="button" class="btn btn-primary" (click)="clickSubmit()">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>

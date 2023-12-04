@@ -1,0 +1,7 @@
+/* this needs to be here, so that suggestions don't hide behind the modal */
+/deep/ .cdk-overlay-container { z-index: 9999; }
+
+mat-form-field
+{
+    width:100%;
+}

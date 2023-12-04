@@ -1,0 +1,57 @@
+input
+{
+    width: 100%;
+}
+
+#reader
+{
+    margin-top:10px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+table
+{
+    vertical-align: middle;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+td
+{
+    min-width: 150px;
+}
+
+table, h2
+{
+    margin-top:3%;
+}
+
+input
+{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.bottom
+{
+    margin-top:20px;
+}
+
+.readonly
+{
+    background-color: lightgray;
+}
+
+.alert-dismissible{
+    position: fixed;
+    left: 50;
+    right: 0;
+    top: 50;
+    bottom: 0;
+    z-index: 105;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

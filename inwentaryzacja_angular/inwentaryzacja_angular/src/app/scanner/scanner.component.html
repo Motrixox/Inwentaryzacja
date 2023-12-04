@@ -1,0 +1,66 @@
+<!--Success alert-->
+<div *ngIf="successMessage" class="alert alert-success alert-dismissible" role="alert">
+    {{ successMessage }}
+  <button type="button" (click)="onCloseAlert('succ')" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!--Fail alert-->
+<div *ngIf="failMessage" class="alert alert-danger alert-dismissible" role="alert">
+    {{ failMessage }}
+  <button type="button" (click)="onCloseAlert('fail')" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="container mat-elevation-z5 my-5 ml-5 mr-5">
+    <div class="row">
+        <div class="col-sm-4 col-12 m-auto">
+            <div id="reader"></div>
+            <input type="text" value="zeskanowany kod" id="scannerInput" class="readonly" disabled/>
+        </div>
+        <div class="col-sm-8 col-12 m-auto">
+            <h2>Wynik:</h2>
+            <div *ngIf="itemFound" class="message alert alert-success">{{message}}</div>
+            <div *ngIf="!itemFound" class="message alert alert-danger">{{message}}</div>
+            <table id="resultTable" class="table" [hidden] = "!itemFound">
+                <thead>
+                    <tr>
+                        <th>Typ</th>
+                        <th>Opis</th>
+                        <th>Numer seryjny</th>
+                        <th>Status</th>
+                        <th *ngIf="item?.status == 2">Właściciel</th>
+                        <th *ngIf="item?.status == 2">Stanowisko</th>
+                        <th>Miejsce</th>
+                        <th>Status inwentaryzacji</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{item?.deviceType?.type}}</td>
+                        <td>{{item?.description}}</td>
+                        <td>{{item?.serialNumber}}</td>
+                        <td *ngIf="item?.status == 1">Niewydany</td>
+                        <td *ngIf="item?.status == 2">Wydany</td>
+                        <td *ngIf="item?.status == 3">Wyłączony</td>
+                        <td *ngIf="item?.status == 2">{{item?.employee?.firstName}} {{item?.employee?.lastName}}</td>
+                        <td *ngIf="item?.status == 2">{{item?.employee?.position}}</td>
+                        <td>{{item?.place}}</td>
+                        <td *ngIf="item?.isConfirmed"><div class="alert alert-success">Zatwierdzony</div></td>
+                        <td *ngIf="!item?.isConfirmed"><div class="alert alert-danger">Niezatwierdzony</div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="bottom" [hidden] = "!hasResult || !itemFound">
+                <h3>Akcje:</h3>
+                <app-inventory-device (success)="handleCodeResult(result)" (successMessage)="onSuccessEmitted($event)" (failMessage)="onFailEmitted($event)" [deviceId]="item?.id" [status]="item?.isConfirmed"></app-inventory-device>
+                <app-issue-device-modal *ngIf="item?.status == 1" (success)="handleCodeResult(result)" (successMessage)="onSuccessEmitted($event)" (failMessage)="onFailEmitted($event)" [deviceId]="item?.id" [serialNumber]="item?.serialNumber" [place]="item?.place"></app-issue-device-modal>
+                <app-return-device-modal *ngIf="item?.status == 2" (success)="handleCodeResult(result)" (successMessage)="onSuccessEmitted($event)" (failMessage)="onFailEmitted($event)" [deviceId]="item?.id" [place]="item?.place"></app-return-device-modal>
+                <app-turn-off-modal *ngIf="item?.status != 3" (success)="handleCodeResult(result)" (successMessage)="onSuccessEmitted($event)" (failMessage)="onFailEmitted($event)" [deviceId]="item?.id">Wyłącz urządzenie</app-turn-off-modal>
+            </div>
+            <div class="bottom" [hidden] = "!hasResult || itemFound">
+                <h3>Akcje:</h3>
+                <app-add-device-scanner-modal (success)="handleCodeResult(result)" (successMessage)="onSuccessEmitted($event)" (failMessage)="onFailEmitted($event)" [code]="result"></app-add-device-scanner-modal>
+            </div>
+        </div>
+    </div>
+</div>
+

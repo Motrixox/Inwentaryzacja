@@ -1,0 +1,20 @@
+<Button class="btn btn-secondary" (click)="openModal()">Wyłącz urządzenie</Button>
+
+<div class="modal fade" id="turnOffModal" tabindex="-1" role="dialog" aria-labelledby="turnOffModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="turnOffModalLabel">Wyłącz urządzenie</h5>
+                <button type="button" class="btn-close" (click)="onCloseModal()" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">Czy na pewno chcesz wyłączyć to urządzenie? Tej operacji nie można cofnąć!</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onCloseModal()" data-dismiss="modal">Nie</button>
+                <button type="button" class="btn btn-primary" (click)="clickSubmit()">Tak</button>
+            </div>
+        </div>
+    </div>
+</div>

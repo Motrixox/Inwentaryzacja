@@ -1,0 +1,24 @@
+<Button class="btn btn-primary" (click)="openModal()">Zmień status inwentaryzacji</Button>
+
+<div class="modal fade" id="inventoryDeviceModal" tabindex="-1" role="dialog" aria-labelledby="inventoryDeviceModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="inventoryDeviceModalLabel">Zmień status inwentaryzacji</h5>
+                <button type="button" class="btn-close" (click)="onCloseModal()" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>
+                    Czy na pewno chcesz zmienić status inwentaryzacji tego urządzenia na:
+                </h3>
+                <div *ngIf="!status" class="alert alert-success">Zatwierdzony</div>
+                <div *ngIf="status" class="alert alert-danger">Niezatwierdzony</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onCloseModal()" data-dismiss="modal">Nie</button>
+                <button type="button" class="btn btn-primary" (click)="clickSubmit()">Tak</button>
+            </div>
+        </div>
+    </div>
+</div>
