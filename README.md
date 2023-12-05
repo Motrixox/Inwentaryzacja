@@ -2,6 +2,7 @@
 
 This repository presents my contribution to the group project. <br>
 Final product had more functionalities done by other members of our project group. <br>
+This was also my first encounter with Angular, so the code may not be the best quality. <br>
 Images at the bottom of readme.
 
 ## Technologies
